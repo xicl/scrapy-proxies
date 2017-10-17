@@ -32,6 +32,7 @@ class Mode:
 
 class RandomProxy(object):
     def __init__(self, settings):
+        self.settings = settings
         self.mode = settings.get('PROXY_MODE')
         self.proxy_list = settings.get('PROXY_LIST')
         self.chosen_proxy = ''
@@ -99,6 +100,7 @@ class RandomProxy(object):
             log.debug('Proxy user pass not found')
         log.debug('Using proxy <%s>, %d proxies left' % (
                 proxy_address, len(self.proxies)))
+        self.__init__(self.settings)
 
     def process_exception(self, request, exception, spider):
         if 'proxy' not in request.meta:
